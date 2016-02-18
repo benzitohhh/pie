@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "browserify index.js -o build.js",
-    "watch": "watchify index.js -o build.js",
-    "start": "http-server -s & npm run watch"
+    "watch": "watchify index.js -o build.js --debug --verbose",
+    "serve": "http-server -s",
+    "start": "npm run watch & npm run serve"
   },
   "author": "",
   "license": "ISC",
