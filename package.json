@@ -1,0 +1,23 @@
+{
+  "name": "pie",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify index.js -o build.js",
+    "watch": "watchify index.js -o build.js",
+    "start": "http-server -s & npm run watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "^13.0.0",
+    "http-server": "^0.8.5",
+    "watchify": "^3.7.0"
+  },
+  "dependencies": {
+    "d3": "^3.5.15",
+    "nvd3": "^1.8.2"
+  }
+}
