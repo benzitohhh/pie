@@ -1,9 +1,10 @@
-var d3             = require('d3'),
-    c3             = require('c3'),
-    React          = require('react'),
-    ReactDOM       = require('react-dom'),
-    ChartComponent = require('./ChartComponent'),
-    DonutWithLegend = require('./DonutWithHtmlLegend')
+var d3              = require('d3'),
+    c3              = require('c3'),
+    React           = require('react'),
+    ReactDOM        = require('react-dom'),
+    ChartComponent  = require('./ChartComponent'),
+    DonutWithLegend = require('./DonutWithHtmlLegend'),
+    PieChartC3      = require('./PieChartC3')
 ;
 
 var values = [475, 48, 37, 19, 9, 6, 4, 2, 2, 4, 2, 2, 70];
@@ -41,15 +42,12 @@ function get_color_for_c3(_, name) {
 }
 
 var rows = [
-  [0, 1, 2, 3, 4, 5, 6, 7, 8],                    // ids
+  [0, 1, 2, 3, 4, 5, 6, 7, 8],                    // ids (must be unique - so we use idx here)
   [120, 233, 367, 900, 632, 343, 442, 334, 556]   // values
 ];
 
 var c3_donut = c3.generate({
   bindto: '#c3-chart-1',
-  padding: {
-    left: 0
-  },
   data: {
     rows: c3_rows,
     type : 'donut',
@@ -64,7 +62,6 @@ var c3_donut = c3.generate({
   // legend: {
   //   position: 'inset'
   // },
-
 
   donut: {
     title: total + " families",
@@ -141,31 +138,23 @@ var options = {
   // }
 };
 
-// var MyChart = React.createClass({
-//   render: function() {
-//     return (
-//       <ChartComponent data={chartData} element='someId' type='donut' options={options} />
-//     );
-//   }
-// });
-
-
-// PROBLEMS:
-// 1. 'names' must be unique.... so use an id. Then
-//     legend: set with onrendered callback (TODO: check we habdle long names)
-//     tooltip: set via 
-
-
-
-
-
 ReactDOM.render(
-  <DonutWithLegend
+
+  // <DonutWithLegend
+  //   values={values}
+  //   dims={dims}
+  //   value_description={value_description}
+  //   dims_descriptions={dims_descriptions}
+  //   colour_scheme={colour_scheme}
+  // />,
+
+  <PieChartC3
     values={values}
     dims={dims}
     value_description={value_description}
     dims_descriptions={dims_descriptions}
     colour_scheme={colour_scheme}
   />,
+  
   document.getElementById('react-container')
 );
