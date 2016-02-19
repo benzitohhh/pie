@@ -1,7 +1,8 @@
 var c3             = require('c3'),
     React          = require('react'),
     ReactDOM       = require('react-dom'),
-    ChartComponent = require('./ChartComponent')
+    ChartComponent = require('./ChartComponent'),
+    Outer          = require('./Outer')
 ;
 
 var chartData = {
@@ -33,5 +34,6 @@ var MyChart = React.createClass({
 // Render
 ReactDOM.render(
   <MyChart />,
+  //<Outer />,
   document.getElementById('react-container')
 );
