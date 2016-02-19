@@ -20,15 +20,6 @@ var dims_descriptions = [
   }
 ];
 
-var name_items = dims[0];
-
-var total = d3.sum(values);
-
-var c3_rows = [
-  values.map(function(d, i) { return i; }), // array of idxs
-  values                                    // array of values
-];
-
 var DEFAULT_COLOURS = [
   "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf", "#1f77b4", "#ff7f0e", "#2ca02c", "#98df8a", "#ff9896", "#c5b0d5", "#c49c94", "#f7b6d2", "#c7c7c7", "#dbdb8d", "#9edae5", "#aec7e8", "#ffbb78"
 ];
@@ -36,109 +27,6 @@ var DEFAULT_COLOURS = [
 function colour_scheme(idx) {
   return DEFAULT_COLOURS[idx % DEFAULT_COLOURS.length];
 }
-
-function get_color_for_c3(_, name) {
-  return colour_scheme(name); // assume name is the element idx
-}
-
-var rows = [
-  [0, 1, 2, 3, 4, 5, 6, 7, 8],                    // ids (must be unique - so we use idx here)
-  [120, 233, 367, 900, 632, 343, 442, 334, 556]   // values
-];
-
-/*
-var c3_donut = c3.generate({
-  bindto: '#c3-chart-1',
-  data: {
-    rows: c3_rows,
-    type : 'donut',
-    color: get_color_for_c3
-    // onmouseover: function(d) {
-    //   //debugger; // exposes id, value, index etc...
-    // }
-  },
-  legend: {
-    position: 'right'
-  },
-  // legend: {
-  //   position: 'inset'
-  // },
-
-  donut: {
-    title: total + " families",
-    label: {
-      //// pie slice label: default is ratio, formatted as percentage
-      // format: function(value, ratio, id) {
-      //   return ratio;
-      // }
-    }
-  },
-  tooltip: {
-    format: {
-      name: function(name, ratio, id, index) {
-        return name_items[index].name;
-      },
-      value: function (val, ratio, id) {
-        // var pc = d3.format('.1%')(ratio); 
-        // return val + " families (" + pc + ")"; // long strings look ugly
-        return val;
-      }
-    }
-  },
-  
-  onrendered: function() {
-
-    var MAX_CHARS = 27;
-    var WIDTH = 200;
-    
-    // workaround to format legend items
-    d3.select('#c3-chart-1')
-      .selectAll('.c3-legend-item text')
-      .text(function(d, i) {
-        var name = name_items[i].short_name;
-        if (name.length >= MAX_CHARS) {
-          name = name.slice(0, MAX_CHARS - 3) + "...";
-        }
-        var value = values[i];
-        return name + " (" + value + ")";
-      })
-    ;
-
-    // workaround to make legend items wider and clickable
-    d3.select('#c3-chart-1')
-      .selectAll('.c3-legend-item-event')
-      .attr('width', WIDTH)
-    ;
-
-  }
-});
-*/
-
-
-// How to edit legend content
-
-// Approach 1: onrendered, edit the svg directly
-
-// Approach 2: set legend content in data; set custom content for tooltip
-
-
-
-var options = {
-  legend: {
-    position: 'right'
-  },
-  donut: {
-    title: "1203 families"
-  }
-  // onrendered: function() {
-  //   d3.select('#someId')
-  //     .selectAll('.c3-legend-item text')
-  //     .text(function(d, i) {
-  //       return chartData.columns[i][0] + " (12)";
-  //     })
-  //   ;
-  // }
-};
 
 ReactDOM.render(
 
