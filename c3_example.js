@@ -2,7 +2,6 @@ var d3              = require('d3'),
     c3              = require('c3'),
     React           = require('react'),
     ReactDOM        = require('react-dom'),
-    ChartComponent  = require('./ChartComponent'),
     DonutWithLegend = require('./DonutWithHtmlLegend'),
     PieChartC3      = require('./PieChartC3')
 ;
