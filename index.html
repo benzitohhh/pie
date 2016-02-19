@@ -2,17 +2,30 @@
   <head>
     <link rel="stylesheet" href="node_modules/nvd3/build/nv.d3.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="node_modules/c3/c3.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" type="text/css" media="screen" />
     <title>title</title>
     <style>
+      .circle-filled {
+           border-radius: 50%;
+           width: 12px;
+           height: 12px;
+           display: inline-block;
+           margin-right: 10px;
+           border: 0;
+           background-color: grey;
+           margin-top: 3px;
+       }
     </style>
   </head>
   <body>
-    <div id="c3-chart-1"></div>
-    <div id="c3-chart-2"></div>
-    <div id="am-chart"></div>
-    <div id="react-container"></div>
-    <div id="container">
-      <svg style="height: 500px"></svg>
+    <div class="container">
+      <div id="c3-chart-1"></div>
+      <div id="c3-chart-2"></div>
+      <div id="am-chart"></div>
+      <div id="react-container"></div>
+      <div id="container">
+        <svg style="height: 500px"></svg>
+      </div>
     </div>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="node_modules/amcharts/dist/amcharts/amcharts.js"></script>

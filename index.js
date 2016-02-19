@@ -73,6 +73,9 @@ var c3_donut = c3.generate({
   },
   donut: {
     title: "1203 families"
+  },
+  onrendered: function() {
+    console.log('wooop');
   }
 });
 
