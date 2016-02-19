@@ -46,6 +46,7 @@ var rows = [
   [120, 233, 367, 900, 632, 343, 442, 334, 556]   // values
 ];
 
+/*
 var c3_donut = c3.generate({
   bindto: '#c3-chart-1',
   data: {
@@ -111,6 +112,7 @@ var c3_donut = c3.generate({
 
   }
 });
+*/
 
 
 // How to edit legend content

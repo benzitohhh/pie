@@ -8,19 +8,44 @@ var d3             = require('d3'),
 var MAX_CHARS = 27;
 var WIDTH     = 200;
 
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
-}
-
 var PieChartC3 = React.createClass({
-  
-  render: function() {
+
+  shouldComponentUpdate: function(nextProps) {
+      // if(this.props.data.columns.length
+      //     !== nextProps.data.columns.length) { // shallow check
+      //     return true;
+      // } else if(JSON.stringify(this.props.data.columns)
+      //         !== JSON.stringify(nextProps.data.columns)) { // deeper check
+      //     return  true;
+      // }
+    // return false;
+    return true; // TODO: do we need this?
+  },
+
+  componentDidMount: function() {
+    this._generateChart();
+  },
+
+  componentDidUpdate: function(prevProps) {
+      // if(prevProps.data.columns !== this.props.data.columns) {
+      //     this._generateChart();
+      // }
+    this._generateChart(); // TODO: do we need this?
+  },
+
+  componentWillUnmount: function() {
+      this._destroyChart();
+  },
+
+  _generateChart: function() {
     var values            = this.props.values,
         dims              = this.props.dims,
         value_description = this.props.value_description,
         dims_descriptions = this.props.dims_descriptions,
         colour_scheme     = this.props.colour_scheme
     ;
+
+    var container = this.refs.container;
 
     var items = dims[0];
 
@@ -37,9 +62,8 @@ var PieChartC3 = React.createClass({
       return colour_scheme(name); // assume name is the element idx
     }
 
-    var temp_id = 'temp' + getRandomInt(100000000); // temporary hack to get a unique id...
-
     var options = {
+      bindto: container,
       data: {
         color: get_color_for_c3,
         rows: c3_rows,
@@ -71,7 +95,7 @@ var PieChartC3 = React.createClass({
       },
       onrendered: function() {
         // workaround to format legend items (can be removed when we have custom legends)
-        d3.select('#' + temp_id)
+        d3.select(container)
           .selectAll('.c3-legend-item text')
           .text(function(d, i) {
             var name = name_items[i].short_name;
@@ -83,16 +107,24 @@ var PieChartC3 = React.createClass({
           })
         ;
         // workaround to make legend items wider and clickable (can be removed when we have custom legends)
-        d3.select('#' + temp_id)
+        d3.select(container)
           .selectAll('.c3-legend-item-event')
           .attr('width', WIDTH)
         ;
       }
-    };    
+    };  
 
+    this.chart = c3.generate(options);
+  },
+
+  _destroyChart: function() {
+      this.chart.destroy();
+  },
+
+  
+  render: function() {
     return (
-        // TODO: remove data and type from ChartComponent (we'll pass in everything via options)
-        <ChartComponent data={{}} type={'donut'} element={temp_id} options={options} />
+        <div ref={'container'} /> 
     );
   }
 });
